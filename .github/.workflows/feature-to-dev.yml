@@ -1,0 +1,41 @@
+name: Feature to Dev CI
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies for backend
+      run: |
+        cd backend
+        npm install
+
+    - name: Run backend unit tests
+      run: |
+        cd backend
+        npm test
+
+    - name: Install dependencies for frontend
+      run: |
+        cd frontend
+        npm install
+
+    - name: Run frontend unit tests
+      run: |
+        cd frontend
+        npm test
+
+    - name: Merge dev to main
+      if: success()
+      uses: devmasx/merge-branch@v1.6.0
+      with:
+        target_branch: main
+        github_token: ${{ secrets.GITHUB_TOKEN }}
