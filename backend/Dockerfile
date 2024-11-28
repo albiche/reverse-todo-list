@@ -18,7 +18,7 @@ COPY . .
 # Build argument for API URL
 ARG MONGO_URL
 
-# Set environment variable for build
+# Set environment variable for build.
 ENV MONGO_URL $MONGO_URL
 
 # Expose the backend port
