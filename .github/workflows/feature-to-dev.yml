@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Récupère toutes les branches
 
     - name: Install dependencies for backend
       run: |
@@ -41,12 +39,3 @@ jobs:
       with:
         target_branch: main
         github_token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Force push to main
-      if: success()
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git checkout main
-        git commit --allow-empty -m "Force push to trigger dev-to-main"
-        git push origin main
