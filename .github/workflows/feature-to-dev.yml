@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Récupère toutes les branches, pas seulement la branche active
 
     - name: Install dependencies for backend
       run: |
